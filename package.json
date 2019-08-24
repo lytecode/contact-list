@@ -1,0 +1,27 @@
+{
+  "name": "phone-contacts",
+  "version": "1.0.0",
+  "description": "A phone contact list",
+  "main": "./server/app.js",
+  "scripts": {
+    "dev:server": "nodemon ./server/app.js",
+    "start": "node ./server/app.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "Mongodb"
+  ],
+  "author": "Mbonu Chukwudinma",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.10"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
