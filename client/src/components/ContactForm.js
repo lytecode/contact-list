@@ -35,6 +35,7 @@ class ContactForm extends Component {
                 placeholder="John Doe"
                 onChange={this.onChange}
                 value={this.state.name}
+                required
               />
             </FormGroup>
           </Col>
@@ -48,6 +49,7 @@ class ContactForm extends Component {
                 placeholder="080xxxxxxxx"
                 onChange={this.onChange}
                 value={this.state.phoneNumber}
+                required
               />
             </FormGroup>
           </Col>
@@ -72,6 +74,7 @@ class ContactForm extends Component {
             placeholder="1234 Main St"
             onChange={this.onChange}
             value={this.state.address}
+            required
           />
         </FormGroup>
         <Row form>

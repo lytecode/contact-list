@@ -1,39 +1,27 @@
 import React, { Component } from "react";
-import { ListGroup, ListGroupItem, Button, Container } from "reactstrap";
-
-import uuid from "uuid";
-import ContactForm from "./ContactForm";
+import { ListGroup, ListGroupItem, Button } from "reactstrap";
 
 class Contacts extends Component {
-  state = {
-    contacts: [
-      { id: uuid(), name: "Emmanuel", phoneNumber: "08123457733" },
-      { id: uuid(), name: "John", phoneNumber: "08023755991" },
-      { id: uuid(), name: "James", phoneNumber: "08673457777" },
-      { id: uuid(), name: "Fish", phoneNumber: "08099577330" }
-    ]
-  };
-
-  addContact = contact => {
-    contact.id = uuid();
-    const newState = [...this.state.contacts, contact];
-    this.setState({ contacts: newState });
+  onRemoveContact = contact => {
+    this.props.removeContact(contact);
   };
 
   render() {
-    const { contacts } = this.state;
+    const { contacts } = this.props;
 
     const contactsList = contacts.map(contact => (
-      <ListGroupItem key={contact.id}>
-        {contact.name} - {contact.phoneNumber}
+      <ListGroupItem key={contact.id} className="float-left">
+        <h6>
+          {contact.name} - {contact.phoneNumber}{" "}
+        </h6>
+        <br />
+        Email: {contact.email} <br />
+        Address: {contact.address} <br />
+        {contact.city} - {contact.state} - {contact.zip}
         <Button
           color="danger"
           className="float-right"
-          onClick={() => {
-            this.setState(state => ({
-              contacts: state.contacts.filter(item => item.id !== contact.id)
-            }));
-          }}
+          onClick={() => this.onRemoveContact(contact)}
         >
           &times;
         </Button>
@@ -41,12 +29,9 @@ class Contacts extends Component {
     ));
 
     return (
-      <Container className="container">
-        <ContactForm addContact={this.addContact} />
-        <br />
-        <hr />
+      <div>
         <ListGroup>{contactsList}</ListGroup>
-      </Container>
+      </div>
     );
   }
 }
