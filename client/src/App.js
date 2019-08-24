@@ -14,14 +14,14 @@ class App extends Component {
   };
 
   componentDidMount() {
-    axios.get("http://localhost:3500/api/contacts").then(res => {
+    axios.get("http://localhost:5000/api/contacts").then(res => {
       this.setState({ contacts: res.data.data });
     });
   }
 
   addContact = contact => {
     //send new contact to the backend database via BE api
-    axios.post("http://localhost:3500/api/contacts", contact).then(res => {
+    axios.post("http://localhost:5000/api/contacts", contact).then(res => {
       if (res.status === 201) {
         this.componentDidMount();
       }
@@ -30,7 +30,7 @@ class App extends Component {
 
   removeContact = contact => {
     axios
-      .delete(`http://localhost:3500/api/contacts/${contact._id}`)
+      .delete(`http://localhost:5000/api/contacts/${contact._id}`)
       .then(res => {
         if (res.status === 200) {
           this.componentDidMount();
