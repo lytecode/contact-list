@@ -13,6 +13,36 @@ const contactSchema = new Schema({
     required: true,
     trim: true,
     default: ""
+  },
+  email: {
+    type: String,
+    trim: true,
+    default: ""
+  },
+  address: {
+    type: String,
+    required: true,
+    trim: true,
+    default: ""
+  },
+  state: {
+    type: String,
+    trim: true,
+    default: ""
+  },
+  city: {
+    type: String,
+    trim: true,
+    default: ""
+  },
+  zip: {
+    type: String,
+    trim: true,
+    default: ""
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
 });
 

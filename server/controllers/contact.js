@@ -4,17 +4,26 @@ const Contact = require("../models/Contact");
 module.exports = {
   /**
    * @route   POST /api/contacts
+   * @desc    Create contact
    * @access  Public
    */
   createContact: async (req, res) => {
-    const { name, phoneNumber } = req.body;
+    const { name, phoneNumber, address, email, state, city, zip } = req.body;
 
-    if (!name || !phoneNumber) {
+    if (!name || !phoneNumber || !address) {
       return res.status(400).json({
-        message: "Name or Phone number cannot be empty"
+        message: "Name, Phone number or Address cannot be empty"
       });
     }
-    const newContact = new Contact({ name, phoneNumber });
+    const newContact = new Contact({
+      name,
+      phoneNumber,
+      address,
+      email,
+      state,
+      city,
+      zip
+    });
     const contact = await newContact.save();
     res.status(201).json({
       message: "success",
@@ -24,10 +33,11 @@ module.exports = {
 
   /**
    * @route   GET /api/contacts
+   * @desc    GET  contacts
    * @access  Public
    */
   findContacts: async (req, res) => {
-    const contacts = await Contact.find();
+    const contacts = await Contact.find().sort({ date: -1 });
     res.status(200).json({
       message: "success",
       data: contacts
@@ -36,6 +46,7 @@ module.exports = {
 
   /**
    * @route   GET /api/contacts/:contactId
+   * @desc    GET  contact
    * @access  Public
    */
   findContact: async (req, res) => {
@@ -56,22 +67,23 @@ module.exports = {
 
   /**
    * @route   PUT /api/contacts/:contactId
+   * @desc    UPDATE contact
    * @access  Public
    */
   updateContact: async (req, res) => {
     const { contactId } = req.params;
-    const { name, phoneNumber } = req.body;
+    const { name, phoneNumber, address, email, state, city, zip } = req.body;
 
-    if (!name || !phoneNumber) {
+    if (!name || !phoneNumber || !address) {
       return res.status(400).json({
-        message: "Name or Phone number cannot be empty"
+        message: "Name, Phone number or address  cannot be empty"
       });
     }
 
     try {
       const contact = await Contact.findOneAndUpdate(
         { _id: contactId },
-        { name, phoneNumber },
+        { name, phoneNumber, address, email, state, city, zip },
         { new: true }
       );
 
@@ -88,6 +100,7 @@ module.exports = {
 
   /**
    * @route   DELETE /api/contacts/:contactId
+   * @desc    DELETE contact
    * @access  Public
    */
   removeContact: async (req, res) => {
