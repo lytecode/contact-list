@@ -10,7 +10,7 @@ class Contacts extends Component {
     const { contacts } = this.props;
 
     const contactsList = contacts.map(contact => (
-      <ListGroupItem key={contact.id} className="float-left">
+      <ListGroupItem key={contact._id} className="float-left">
         <h6>
           {contact.name} - {contact.phoneNumber}{" "}
         </h6>
